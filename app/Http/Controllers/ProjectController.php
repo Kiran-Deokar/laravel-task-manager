@@ -27,6 +27,18 @@ class ProjectController extends Controller implements HasMiddleware
         ];
     }
 
+    public function dashboard(Request $request)
+    {
+        $user = $request->user();
+
+        $data = $this->projectService->getDashboardData(
+            $user->user_id,
+            $user->role === 'admin'
+        );
+
+        return ApiResponse::success($data, 'Dashboard data fetched successfully');
+    }
+
     public function index()
     {
         $projects = $this->projectService->getAll();

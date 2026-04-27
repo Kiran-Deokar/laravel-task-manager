@@ -12,7 +12,7 @@ Route::post('/register', [AuthController::class, 'register']);
 // Protected Routes
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
-    
+    Route::get('/dashboard', [ProjectController::class, 'dashboard']);
     Route::apiResource('projects', ProjectController::class);
     Route::apiResource('tasks', TaskController::class);
     Route::put('/tasks/{task}/status', [TaskController::class, 'changeStatus']);
